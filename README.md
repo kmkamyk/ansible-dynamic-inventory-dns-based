@@ -68,6 +68,28 @@ Run the script as an Ansible dynamic inventory source:
 ```bash
 ansible-inventory -i dynamic_inventory.py --list
 ```
+## Using with AWX
+
+This dynamic inventory script also works seamlessly with AWX. To integrate the script with AWX, follow these steps:
+
+1. **Add the project in AWX:**
+   - Go to the **Projects** section in AWX and add a new project.
+   - Set the project type to **Git** and provide the repository URL where the script is hosted.
+   - Make sure the project syncs successfully.
+
+2. **Create an Inventory:**
+   - Go to the **Inventories** section and create a new inventory.
+   
+3. **Configure the Inventory Source:**
+   - In the **Sources** tab of the inventory, click to add a new source.
+   - Choose **Project** as the source type and select the project you created earlier.
+   - Set the **Inventory File** to `dynamic_inventory.py` (the script you added in your project).
+
+4. **AWX will now interpret `dynamic_inventory.py` as an inventory source:**
+   - When AWX runs a job using this inventory, it will execute the script and generate a dynamic inventory based on the hosts in the specified subnet.
+   - The hosts will be grouped as defined in the script, and you can use this dynamic inventory in your playbooks as usual.
+
+Now your AWX environment is ready to use dynamic inventory based on hosts in the subnet!
 
 ## Requirements
 
